@@ -3,10 +3,6 @@ import ProductCard from "@/components/ProductCard";
 import Wrapper from "@/components/Wrapper";
 
 export default function Home() {
-  const productCards = [];
-  for (let i = 1; i <= 8; i++) {
-    productCards.push(<ProductCard key={i} />);
-  }
   return <main><HeroBanner />
     <Wrapper>
       <div className="text-center max-w-[800px] mx-auto my-[50px] md:my-[80px]">
@@ -20,7 +16,7 @@ export default function Home() {
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-14 px-5 md:px-0">
-        {productCards}
+        <ProductCard/>
       </div>
     </Wrapper>
   </main>

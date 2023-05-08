@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 
 
 export default function App({ Component, pageProps }) {
+    
     return (
         <>
             <Head>
@@ -32,6 +33,7 @@ export default function App({ Component, pageProps }) {
             </Head>
                 <Header />
                 <Component {...pageProps} />
+                
                 <Footer />
         </>
     );
