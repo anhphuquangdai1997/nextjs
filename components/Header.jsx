@@ -7,12 +7,14 @@ import { IoMdHeartEmpty } from "react-icons/io";
 import { BsCart } from "react-icons/bs";
 import { BiMenuAltRight } from "react-icons/bi";
 import { VscChromeClose } from "react-icons/vsc";
+import { fetchDataFromApi } from "@/utils/api";
 
 const Header = () => {
     const [mobileMenu, setMobileMenu] = useState(false);
     const [showCatMenu, setShowCatMenu] = useState(false);
     const [show, setShow] = useState("translate-y-0");
     const [lastScrollY, setLastScrollY] = useState(0);
+    const [categories, setcategories] = useState(null);
 
     const controlNavbar = () => {
         if (window.scrollY > 200) {
@@ -35,6 +37,16 @@ const Header = () => {
     }, [lastScrollY]);
 
 
+    useEffect(() => {
+        fetchCategories()
+    }, []);
+
+    const fetchCategories = async()=>{
+        const {data}= await fetchDataFromApi("/api/categories?populate=*");
+        setcategories(data)
+    } 
+
+
 
     return (
         <header
@@ -44,12 +56,13 @@ const Header = () => {
                 <Link href="/">
                     <img src="/logo.svg" className="w-[40px] md:w-[60px]" />
                 </Link>
-                <Menu showCatMenu={showCatMenu} setShowCatMenu={setShowCatMenu} />
+                <Menu showCatMenu={showCatMenu} setShowCatMenu={setShowCatMenu} categories={categories} />
                 {mobileMenu && (
                     <MenuMobile
                         showCatMenu={showCatMenu}
                         setShowCatMenu={setShowCatMenu}
-                        setMobileMenu={setMobileMenu} />
+                        setMobileMenu={setMobileMenu}
+                        categories={categories} />
                 )}
 
                 <div className="flex items-center gap-2 text-black">
